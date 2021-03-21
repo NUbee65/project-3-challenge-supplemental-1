@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anyone Can Cook!</title>
+
+  <!-- Bootstrap CSS and JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+  <!-- D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+
+  <!-- Custom stylesheet and font -->
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+
+  <!-- favicon.ico -->
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+  <!-- Custom JavaScript -->
+  <script src="static/js/data.js" defer></script>
+  <script src="static/js/app.js" defer></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <br>
+          <h1> 
+              Anyone Can Cook! 
+          </h1> 
+          <div class="jumbotron">
+          </div>
+          <h3>
+            New to cooking? Looking to spice up your weekly menus? 
+            <br>
+            <br>
+            Anyone Can Cook is here to help you pick exciting recipes and build your grocery list for the week. Start searching below!
+            <br>
+            <br>
+            Start finding some recipes now by entering some search terms!
+    
+    <!-- Start of Data Container with Filter -->
+    <div class="container"> <!-- container -->     
+      <div class="row"> <!-- container row -->
+
+        <!-- Start of filter panel -->
+        <div class="col-md-2">
+          <aside class="filters">
+            <div class="panel panel-default">
+              <div class="panel-heading">Filter Search</div>
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+                    <ul class="list-group" id="filters">
+                    <li class="filter list-group-item">
+                      <label for="date">Item</label>
+                      <input class="form-control" id="datetime" type="text" placeholder="e.g. pasta">
+                    </li>
+                    <li class="filter list-group-item">
+                      <label for="city">Cusine</label>
+                      <select id="selDataset">
+                      <option value="dataset1">American</option>
+                      <option value="dataset2">African</option>
+                      <option value="dataset2">British</option>
+                      <option value="dataset2">Cajun</option>
+                      <option value="dataset2">Caribbean</option>
+                      <option value="dataset2">Eastern European</option>
+                      <option value="dataset2">European</option>
+                      <option value="dataset2">French</option>
+                      <option value="dataset2">German</option>
+                      <option value="dataset2">Greek</option>
+                      <option value="dataset2">Indian</option>
+                      <option value="dataset2">Irish</option>
+                      <option value="dataset2">Italian</option>
+                      <option value="dataset2">Japanese</option>
+                      <option value="dataset2">Jewish</option>
+                      <option value="dataset2">Korean</option>
+                      <option value="dataset2">Latin American</option>
+                      <option value="dataset2">Mediterranean</option>
+                      <option value="dataset2">Middle Eastern</option>
+                      <option value="dataset2">Nordic</option>
+                      <option value="dataset2">Southern</option>
+                      <option value="dataset2">Spanish</option>
+                      <option value="dataset2">Thai</option>
+                      <option value="dataset2">Vietnamese</option>
+                      </select>
+                    </li>
+                    <li class="filter list-group-item">
+                      <label for="state">Calories</label>
+                      <input class="form-control" id="datetime" type="text" placeholder="e.g. 500">
+                    </li>
+                    <li class="filter list-group-item">
+                      <label for="country">Type of Dish</label>
+                      <select id="selDataset">
+                      <option value="dataset1">main course</option>
+                      <option value="dataset2">side dish</option>
+                      <option value="dataset2">dessert</option>
+                      <option value="dataset2">appetizer</option>
+                      <option value="dataset2">salad</option>
+                      <option value="dataset2">bread</option>
+                      <option value="dataset2">breakfast</option>
+                      <option value="dataset2">soup</option>
+                      <option value="dataset2">beverage</option>
+                      <option value="dataset2">sauce</option>
+                      <option value="dataset2">marinade</option>
+                      <option value="dataset2">fingerfood</option>
+                      <option value="dataset2">snack</option>
+                      <option value="dataset2">drink</option>
+                      </select>
+                    </li>
+                    <li class="filter list-group-item">
+                      <label for="shape">Ready in Minutes</label>
+                      <input class="form-control" id="shape" type="text" placeholder="e.g. 30">
+                    </li>
+                    </ul>
+                  </div>
+                  <button id="filter-btn" type="button" class="btn btn-default">Filter Table</button>
+                  <button id="filter-btn" type="button" class="btn btn-default">Reset Selections</button>
+                </form>
+              </div>
+            </div>
+          </aside>
+        </div>
+        <!-- End of filter panel -->
+
+        <!-- Start of data table -->
+        <div class="col-md-10">
+          <div id="table-area" class="">
+            <table id="ufo-table" class="table table-striped">
+              <thead>
+                <tr>
+                <th class="table-head">Recipe ID</th>
+                <th class="table-head">Recipe Title</th>
+                <th class="table-head">Recipe Link</th>
+                <th class="table-head">Likes</th>
+                <th class="table-head">Health Score</th>
+                <th class="table-head">Calories</th>
+                <th class="table-head">Carbs</th>
+                <th class="table-head">Servings</th>
+                <th class="table-head">Ready in Minutes</th>
+                </tr>
+              </thead>
+              <tbody id='ufo-tbody'></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- End of data table -->
+        <button id="submit" type="submit" class="btn btn-default">Add to Grocery List</button>
+      </div> <!-- container row -->
+    </div> <!-- container -->     
+    <!-- End of Data Container with Filter -->
+
+    <!-- Start of footer -->
+    <footer class="footer">
+      <span class="bottom">Anyone Can Cook</span>
+    </footer>
+    <!-- End of footer -->
+  </div>
+
+</body>
+
+</html>
